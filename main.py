@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 from typing import List
@@ -32,6 +33,15 @@ class Jugador(BaseModel):
     tarjetas_amarillas: int
     tarjetas_rojas: int
     categoria: int
+
+# Configuración de CORS para permitir acceso desde todos los orígenes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 @app.get("/jugadores/", response_model=List[Jugador], summary="Obtener todos los jugadores", description="Devuelve una lista de todos los jugadores en la base de datos.")
 async def get_jugadores():
