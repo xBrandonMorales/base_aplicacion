@@ -11,20 +11,27 @@ client = AsyncIOMotorClient(MONGO_URL)
 db = client.proyecto  # Reemplaza "test_database" con el nombre de tu base de datos
 
 class Equipo(BaseModel):
+    _id: str
+    id_equipo: int
+    liga: str
+    puntos: int
     nombre: str
     capitan: str
-    correo_capitan: str
+    correo: str
     entrenador: str
+    numero_telefono: str
 
 class Jugador(BaseModel):
-    curp: str
-    apodo_jugador: str
+    id: int
     nombre: str
-    apellidos: str
-    numero_playera: str
-    correo: str
-    fecha_nacimiento: str
-    numero_telefono: str
+    curp: str
+    puntos: int
+    asistencias: int
+    remates: int
+    goles: int
+    tarjetas_amarillas: int
+    tarjetas_rojas: int
+    categoria: int
 
 @app.get("/jugadores/", response_model=List[Jugador], summary="Obtener todos los jugadores", description="Devuelve una lista de todos los jugadores en la base de datos.")
 async def get_jugadores():
