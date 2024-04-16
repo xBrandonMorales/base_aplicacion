@@ -16,6 +16,21 @@ class Equipo(BaseModel):
     correo_capitan: str
     entrenador: str
 
+class Jugador(BaseModel):
+    curp: str
+    apodo_jugador: str
+    nombre: str
+    apellidos: str
+    numero_playera: str
+    correo: str
+    fecha_nacimiento: str
+    numero_telefono: str
+
+@app.get("/jugadores/", response_model=List[Jugador], summary="Obtener todos los jugadores", description="Devuelve una lista de todos los jugadores en la base de datos.")
+async def get_jugadores():
+    jugadores = await db.jugadores.find().to_list(None)
+    return jugadores
+
 @app.get("/equipos/", response_model=List[Equipo], summary="Obtener todos los equipos", description="Devuelve una lista de todos los equipos en la base de datos.")
 async def get_equipos():
     equipos = await db.equipos.find().to_list(None)
