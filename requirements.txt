@@ -1,2 +1,3 @@
 fastapi
 pymongo
+"mongodb+srv://brandon:<password>@cluster0.w8r4vcx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
